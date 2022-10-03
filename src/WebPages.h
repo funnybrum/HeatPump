@@ -6,6 +6,7 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
  <BODY>
   <form action="/settings" method="get">
    %s<br><br>
+   %s<br><br>
    <br><br>
    <input type="submit" value="Save" style='width: 150px;'>
    &nbsp;&nbsp;&nbsp;
@@ -18,7 +19,8 @@ const char CONFIG_PAGE[] PROGMEM = R"=====(
 )=====";
 
 const char GET_JSON[] PROGMEM = R"=====({
- "dhw_temp":%.1f,
+ "dhw_low_temp":%.1f,
+ "dhw_high_temp":%.1f,
  "buffer_temp":%.1f,
  "inflow_temp":%.1f,
  "outflow_temp":%.1f,
@@ -26,5 +28,7 @@ const char GET_JSON[] PROGMEM = R"=====({
  "cooling":%d,
  "dhw_heating":%d,
  "dhw_direct_heating": %d,
- "rssi":%d,
+ "dhw_circuiation_pump": %d,
+ "ufh_circulation_pump": %d,
+ "rssi":%d
 })=====";

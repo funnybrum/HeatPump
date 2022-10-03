@@ -11,14 +11,16 @@ class DS18B20 {
         float getInflowTemp();
         float getOutflowTemp();
         float getBufferTemp();
-        float getDHWTankTemp();
+        float getDHWTankLowTemp();
+        float getDHWTankHighTemp();
 
     private:
         uint32_t _lastReadMs;
         uint32_t _samplingIntervalMs;
         DallasTemperature* _sensors;
         float _buffer_temp;
-        float _dhw_temp;
+        float _dhw_high_temp;
+        float _dhw_low_temp;
         float _inflow_temp;
         float _outflow_temp;
 };

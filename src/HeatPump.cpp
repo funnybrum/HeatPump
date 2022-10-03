@@ -1,31 +1,54 @@
-#include "HeatPump.h"
+#include "Main.h"
 
-Logger logger = Logger();
-Settings settings = Settings();
+HeatPump::HeatPump(uint8_t l1_coolingPin, uint8_t l2_heatingPin, uint8_t l3_DHWPin) {
+    this->_coolPin = l1_coolingPin;
+    this->_heatPin = l2_heatingPin;
+    this->_dhwPin = l3_DHWPin;
+    setMode(HP_OFF);
 
-WiFiManager wifi = WiFiManager(&logger, &settings.getSettings()->network);
-WebServer webServer = WebServer(&logger, &settings.getSettings()->network);
-DS18B20 tempSensors = DS18B20(D4, 1000);
-
-void setup()
-{ 
-    Serial.begin(74880);
-    while (! Serial) {
-        delay(1);
-    }
-    settings.begin();
-    wifi.begin();
-    webServer.begin();
-    tempSensors.begin();
-
-    wifi.connect();
+    pinMode(_coolPin, OUTPUT);
+    digitalWrite(_coolPin, LOW);
+    pinMode(_heatPin, OUTPUT);
+    digitalWrite(_heatPin,LOW);
+    pinMode(_dhwPin, OUTPUT);
+    digitalWrite(_dhwPin, LOW);
 }
 
-void loop() {
-    wifi.loop();
-    webServer.loop();
-    settings.loop();
-    tempSensors.loop();
+void HeatPump::setMode(HeatPumpMode mode) {
+    this->_mode = mode;
+}
 
-    delay(100);
+void HeatPump::begin() {
+}
+
+void HeatPump::loop() {
+    if (this->_mode != HP_COOLING) {
+        digitalWrite(_coolPin, LOW);
+    }
+
+    if (this->_mode != HP_HEATING) {
+        digitalWrite(_heatPin, LOW);
+    }
+
+    if (this->_mode != HP_DHW_HEATING) {
+        digitalWrite(_dhwPin, LOW);
+    }
+
+    delay(10);
+
+    if (this->_mode == HP_COOLING) {
+        digitalWrite(_coolPin, HIGH);
+    }
+
+    if (this->_mode == HP_HEATING) {
+        digitalWrite(_heatPin, HIGH);
+    }
+
+    if (this->_mode == HP_DHW_HEATING) {
+        digitalWrite(_dhwPin, HIGH);
+    }
+}
+
+HeatPumpMode HeatPump::getMode() {
+    return this->_mode;
 }

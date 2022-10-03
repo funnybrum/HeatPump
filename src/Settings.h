@@ -1,10 +1,12 @@
 #pragma once
 
 #include "SettingsBase.h"
+#include "InfluxDBCollector.h"
 #include "WiFi.h"
 
 struct SettingsData {
     NetworkSettings network;
+    InfluxDBCollectorSettings influxDB;
 };
 
 struct Empty {};

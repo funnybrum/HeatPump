@@ -1,5 +1,5 @@
 #include "Settings.h"
-#include "HeatPump.h"
+#include "Main.h"
 
 Settings::Settings()
     :SettingsBase(&logger) {

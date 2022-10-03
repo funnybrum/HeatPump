@@ -1,20 +1,22 @@
 #pragma once
 
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
-#include <ESP8266HTTPUpdateServer.h>
-#include <ESP8266mDNS.h>
+enum HeatPumpMode {
+    HP_HEATING,
+    HP_COOLING,
+    HP_DHW_HEATING,
+    HP_OFF
+};
 
-#include "user_interface.h"
-
-#include "esp8266-base.h"
-
-#include "DS18B20.h"
-
-#define HTTP_PORT 80
-#define HOSTNAME "therma-v"
-
-extern Logger logger;
-extern Settings settings;
-extern WiFiManager wifi;
-extern DS18B20 tempSensors;
+class HeatPump {
+    public:
+        HeatPump(uint8_t l1_coolingPin=D1, uint8_t l2_heatingPin=D2, uint8_t l3_DHWPin=D3);
+        void begin();
+        void loop();
+        void setMode(HeatPumpMode mode);
+        HeatPumpMode getMode();
+    private:
+        uint8_t _heatPin;
+        uint8_t _coolPin;
+        uint8_t _dhwPin;
+        HeatPumpMode _mode = HP_OFF;
+};
