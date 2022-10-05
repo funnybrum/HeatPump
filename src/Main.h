@@ -11,6 +11,7 @@
 #include "HeatPump.h"
 #include "CirculationPump.h"
 #include "DhwTank.h"
+#include "UFHPumpThermostat.h"
 #include "DataCollector.h"
 
 #include "esp8266-base.h"

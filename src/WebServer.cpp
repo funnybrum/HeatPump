@@ -34,6 +34,7 @@ void WebServer::handle_root() {
 
 void WebServer::handle_settings() {
     wifi.parse_config_params(this);
+    dataCollector.parse_config_params(this);
 
     char network_settings[strlen_P(NETWORK_CONFIG_PAGE) + 32];
     wifi.get_config_page(network_settings);

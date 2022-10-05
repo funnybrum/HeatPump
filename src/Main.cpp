@@ -11,6 +11,7 @@ HeatPump heatPump = HeatPump();
 CirculationPump ufhPump = CirculationPump(D7);
 CirculationPump dhwPump = CirculationPump(D8);
 DHWTank dhwTank = DHWTank();
+UFHPumpThermostat uhfPumpThermostat = UFHPumpThermostat();
 
 void setup()
 { 
@@ -28,6 +29,7 @@ void setup()
     ufhPump.begin();
     dhwPump.begin();
     dhwTank.begin();
+    uhfPumpThermostat.begin();
 
     wifi.connect();
 }
@@ -42,6 +44,7 @@ void loop() {
     ufhPump.loop();
     dhwPump.loop();
     dhwTank.loop();
+    uhfPumpThermostat.loop();
 
     delay(100);
 }
