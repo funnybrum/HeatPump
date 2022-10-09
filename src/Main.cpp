@@ -1,6 +1,6 @@
 #include "Main.h"
 
-Logger logger = Logger();
+Logger logger = Logger(false);
 Settings settings = Settings();
 
 WiFiManager wifi = WiFiManager(&logger, &settings.getSettings()->network);

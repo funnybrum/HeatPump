@@ -22,7 +22,6 @@ void DataCollector::collectData() {
     append("ufh_pump", CP_ON == ufhPump.getMode());
     append("dhw_gas_heating_pump", CP_ON == dhwPump.getMode());
     append("voltage", powerMeter.getVoltage(), 1);
-    append("current", powerMeter.getCurrent(), 1);
     append("power", powerMeter.getPower(), 0);
     append("energy", powerMeter.getEnergy(), 0);
 }

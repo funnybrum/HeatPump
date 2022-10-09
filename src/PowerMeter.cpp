@@ -89,9 +89,10 @@ void PowerMeter::sendLoop() {
 
     cmd->inProgress = true;
     cmd->pending = false;
+    _startMs = millis();
     // Set the command timeout.
-    // 100ms+ main loop, 20 loops = 2+ second
-    cmd->countdown = 20; 
+    // 100ms+ main loop, 10 loops = ~1 second
+    cmd->countdown = 10; 
 }
 
 void PowerMeter::receiveLoop() {
@@ -125,6 +126,7 @@ void PowerMeter::receiveLoop() {
 
     uint8_t data[7];
     Serial.readBytes(data, 7);
+    logger.log("Response in %lums", millis() - _startMs);
     if (crc(data, 6) != data[6]) {
         logger.log("CRC failed on %02X", cmd->cmd[0]);
         logger.log("[%02X, %02X, %02X, %02X, %02X, %02X, %02X]", data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
