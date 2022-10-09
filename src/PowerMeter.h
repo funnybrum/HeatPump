@@ -37,5 +37,4 @@ class PowerMeter {
 
         uint32_t _lastReadMs;
         uint32_t _samplingIntervalMs;
-        uint32_t _startMs;
 };
