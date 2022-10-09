@@ -13,6 +13,7 @@ void UFHPumpThermostat::loop() {
         if (CP_OFF == ufhPump.getMode()) {
             if (tempSensors.getBufferTemp() > 25) {
                 ufhPump.setMode(CP_ON);
+                _started_by_thermostat = true;
                 _pump_off_timestamp = 0;
             }
         }
@@ -23,11 +24,16 @@ void UFHPumpThermostat::loop() {
             }
             if (tempSensors.getBufferTemp() < 25 ||
                 millis() - POST_RUN > _pump_off_timestamp) {
-                // Two options:
-                // 1) The buffer temp has fallen below 25C
-                // 2) The pump was running for more than 10 minutes after the heat pump was turned off
-                ufhPump.setMode(CP_OFF);
-                _pump_off_timestamp = 0;
+                if (_started_by_thermostat) {
+                    // Two options:
+                    // 1) The buffer temp has fallen below 25C
+                    // 2) The pump was running for more than 10 minutes after the heat pump was turned off
+                    ufhPump.setMode(CP_OFF);
+                    _pump_off_timestamp = 0;
+                    _started_by_thermostat = false;
+                } else {
+                    // Do nothing, the pump was manually started
+                }
             }
         }
     }

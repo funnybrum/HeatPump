@@ -119,6 +119,10 @@ void WebServer::handle_get() {
               dhwTank.getMode(),
               dhwPump.getMode() == CP_ON,
               ufhPump.getMode() == CP_ON,
+              powerMeter.getVoltage(),
+              powerMeter.getCurrent(),
+              powerMeter.getPower(),
+              powerMeter.getEnergy(),
               WiFi.RSSI());
     server->send(200, "application/json", buffer);
 }

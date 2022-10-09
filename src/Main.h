@@ -12,6 +12,7 @@
 #include "CirculationPump.h"
 #include "DhwTank.h"
 #include "UFHPumpThermostat.h"
+#include "PowerMeter.h"
 #include "DataCollector.h"
 
 #include "esp8266-base.h"
@@ -28,3 +29,4 @@ extern CirculationPump ufhPump;
 extern CirculationPump dhwPump;
 extern DHWTank dhwTank;
 extern DataCollector dataCollector;
+extern PowerMeter powerMeter;

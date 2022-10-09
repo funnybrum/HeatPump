@@ -9,7 +9,7 @@ DataCollector::DataCollector():
 }
 
 bool DataCollector::shouldCollect() {
-    return millis() > 1000;
+    return millis() > 10000;
 }
 
 void DataCollector::collectData() {
@@ -21,6 +21,10 @@ void DataCollector::collectData() {
     append("tp_dhw_heating", HP_DHW_HEATING == heatPump.getMode());
     append("ufh_pump", CP_ON == ufhPump.getMode());
     append("dhw_gas_heating_pump", CP_ON == dhwPump.getMode());
+    append("voltage", powerMeter.getVoltage(), 1);
+    append("current", powerMeter.getCurrent(), 1);
+    append("power", powerMeter.getPower(), 0);
+    append("energy", powerMeter.getEnergy(), 0);
 }
 
 bool DataCollector::shouldPush() {

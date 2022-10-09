@@ -12,10 +12,11 @@ CirculationPump ufhPump = CirculationPump(D7);
 CirculationPump dhwPump = CirculationPump(D8);
 DHWTank dhwTank = DHWTank();
 UFHPumpThermostat uhfPumpThermostat = UFHPumpThermostat();
+PowerMeter powerMeter = PowerMeter();
 
 void setup()
 { 
-    Serial.begin(74880);
+    Serial.begin(9600);
     while (! Serial) {
         delay(1);
     }
@@ -23,6 +24,7 @@ void setup()
     wifi.begin();
     webServer.begin();
     tempSensors.begin();
+    powerMeter.begin();
     dataCollector.begin();
     
     heatPump.begin();
@@ -39,6 +41,7 @@ void loop() {
     webServer.loop();
     settings.loop();
     tempSensors.loop();
+    powerMeter.loop();
     dataCollector.loop();
     heatPump.loop();
     ufhPump.loop();

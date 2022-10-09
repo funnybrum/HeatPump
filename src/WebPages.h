@@ -30,5 +30,9 @@ const char GET_JSON[] PROGMEM = R"=====({
  "dhw_direct_heating": %d,
  "dhw_circuiation_pump": %d,
  "ufh_circulation_pump": %d,
+ "voltage":%.1f,
+ "current":%.1f,
+ "power":%.1f,
+ "energy":%.0f,
  "rssi":%d
 })=====";

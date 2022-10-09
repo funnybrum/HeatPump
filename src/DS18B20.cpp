@@ -36,10 +36,8 @@ void DS18B20::loop() {
         _buffer_temp = _sensors->getTempC(buffer_sensor_addr);
         _inflow_temp = _sensors->getTempC(inflow_sensor_addr);
         _outflow_temp = _sensors->getTempC(outflow_sensor_addr);
+        _lastReadMs += _samplingIntervalMs;
     }
-
-
-    _lastReadMs = millis();
 }
 
 float DS18B20::getInflowTemp() {
