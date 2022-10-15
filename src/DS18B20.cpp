@@ -8,6 +8,7 @@ uint8_t outflow_sensor_addr[8] = {0x28, 0x53, 0x1C, 0x96, 0xF0, 0x01, 0x3C, 0x88
 
 DS18B20::DS18B20(uint8_t pin, uint32_t samplingIntervalMs) {
     _sensors = new DallasTemperature(new OneWire(pin));
+    _samplingIntervalMs = samplingIntervalMs;
 }
 
 void DS18B20::begin() {
