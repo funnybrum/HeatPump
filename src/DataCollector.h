@@ -7,6 +7,7 @@ class DataCollector: public InfluxDBCollector {
         DataCollector();
         bool shouldCollect();
         void collectData();
-        void onPush();
+        void beforePush();
+        void afterPush();
         bool shouldPush();
 };
